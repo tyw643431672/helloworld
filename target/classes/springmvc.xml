@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 配置Spring MVC自动扫描的路径 -->
+	<context:component-scan base-package="com.znsd.action,com.znsd.view" />
+
+	<!-- 配置视图解析器 将视图返回字符串解析到：/WEB-INF/view/返回值.jsp 下 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 视图前缀 -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<!-- 视图后置 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- BeanNameViewResolver 解析器：使用视图的名字来解析视图 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- order值越小优先级越高 -->
+		<!-- InternalResourceViewResolver的order值是inter的最大值，所以一般来说都是最后调用的 -->
+		<property name="order" value="100" />
+	</bean>
+	
+</beans>
